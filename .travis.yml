@@ -1,0 +1,12 @@
+language: java
+jdk:
+    - openjdk8
+    
+addons:
+  sonarcloud:
+    organization: ilcontecvma
+    token:
+      secure: c3a8da8e8313e4b09f4e6682901d6069cbcc6d27
+script: 
+- ant build
+- sonar-scanner
