@@ -14,6 +14,9 @@
     <path id="run.HelloWorld.classpath">
         <path refid="Test1.classpath"/>
     </path>
+    <path id="run.HelloWorld (1).classpath">
+        <path refid="Test1.classpath"/>
+    </path>
     <target name="init">
         <mkdir dir="bin"/>
         <copy includeemptydirs="false" todir="bin">
@@ -52,6 +55,11 @@
     <target name="HelloWorld">
         <java classname="HelloWorld" failonerror="true" fork="yes">
             <classpath refid="run.HelloWorld.classpath"/>
+        </java>
+    </target>
+    <target name="HelloWorld (1)">
+        <java classname="Run.HelloWorld" failonerror="true" fork="yes">
+            <classpath refid="run.HelloWorld (1).classpath"/>
         </java>
     </target>
 </project>
