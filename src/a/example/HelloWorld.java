@@ -9,7 +9,7 @@ public class HelloWorld {
 		//Print Hello World on output.
 		Logger logger; 
 		logger = Logger.getLogger( HelloWorld.class.getName()); 
-		logger.log(Level.INFO, "Hello world!");
+		logger.log(Level.INFO, "Hello world! hausc");
 		
 	}
 	
