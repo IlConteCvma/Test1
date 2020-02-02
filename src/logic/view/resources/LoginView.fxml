@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane style="-fx-background-color: #20120F;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="logic.view.LoginGraphicController">
+   <children>
+      <ImageView fitHeight="642.0" fitWidth="959.0" layoutX="-84.0" layoutY="-53.0" pickOnBounds="true" preserveRatio="true" />
+      <AnchorPane layoutX="581.0" layoutY="95.0" prefHeight="400.0" prefWidth="250.0" style="-fx-background-color: #9C2B27;">
+         <children>
+            <Label layoutX="26.0" layoutY="191.0" prefHeight="26.0" prefWidth="200.0" text="Insert password">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <Button layoutX="24.0" layoutY="261.0" mnemonicParsing="false" onAction="#signIn" prefHeight="36.0" prefWidth="202.0" style="-fx-background-color: #E45652;" text="Sign in" />
+            <Hyperlink layoutX="55.0" layoutY="298.0" onAction="#forgotPassword" text="Forgot the password?" underline="true" />
+            <Label layoutX="85.0" layoutY="66.0" text="Sign in" textFill="WHITE">
+               <font>
+                  <Font size="26.0" />
+               </font>
+            </Label>
+            <Label layoutX="25.0" layoutY="119.0" prefHeight="26.0" prefWidth="200.0" text="Insert username">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <PasswordField fx:id="psw" layoutX="25.0" layoutY="213.0" prefHeight="30.0" prefWidth="200.0" promptText="Password" />
+            <TextField fx:id="user" layoutX="25.0" layoutY="143.0" prefHeight="30.0" prefWidth="200.0" promptText="Username" />
+         </children>
+      </AnchorPane>
+      <Label layoutX="44.0" layoutY="158.0" text="Welcome to MAAL assistant" textFill="#f8f5f5">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Label>
+      <Label layoutX="44.0" layoutY="195.0" text="If you are not already registered and you want a personal assistant" textFill="WHITE" />
+      <Button layoutX="44.0" layoutY="221.0" mnemonicParsing="false" onAction="#signUp" prefHeight="36.0" prefWidth="202.0" style="-fx-background-color: #E45652;" text="Sign up" />
+   </children>
+</AnchorPane>
