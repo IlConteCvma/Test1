@@ -6,7 +6,7 @@ public class LoginController {
 		System.out.println("Lo studente e' "+ username);
 		/*
 		 * 
-		 Si dovrà fare la chiamata alla classe DAO che interfaccerà con il database
+		 Si dovra fare la chiamata alla classe DAO che interfaccera con il database
 		 * 
 		 */
 		return true;
