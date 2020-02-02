@@ -118,7 +118,7 @@
 			includeDT="false"
 			offlineAllowed="true"
 			outdir="${basedir}/deploy"
-			outfile="ProgettoISPW" nativeBundles="exe"
+			outfile="ProgettoISPW" nativeBundles="none"
 			updatemode="background" >
 	
 			<fx:platform basedir="${java.home}"/>
