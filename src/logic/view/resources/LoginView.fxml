@@ -5,13 +5,11 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane style="-fx-background-color: #20120F;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="logic.view.LoginGraphicController">
+<AnchorPane prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: #f6c640;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="logic.view.graphicController.LoginGraphicController">
    <children>
-      <ImageView fitHeight="642.0" fitWidth="959.0" layoutX="-84.0" layoutY="-53.0" pickOnBounds="true" preserveRatio="true" />
       <AnchorPane layoutX="581.0" layoutY="95.0" prefHeight="400.0" prefWidth="250.0" style="-fx-background-color: #9C2B27;">
          <children>
             <Label layoutX="26.0" layoutY="191.0" prefHeight="26.0" prefWidth="200.0" text="Insert password">
@@ -42,5 +40,6 @@
       </Label>
       <Label layoutX="44.0" layoutY="195.0" text="If you are not already registered and you want a personal assistant" textFill="WHITE" />
       <Button layoutX="44.0" layoutY="221.0" mnemonicParsing="false" onAction="#signUp" prefHeight="36.0" prefWidth="202.0" style="-fx-background-color: #E45652;" text="Sign up" />
+      <AnchorPane fx:id="rootPane" layoutX="221.0" layoutY="270.0" prefHeight="200.0" prefWidth="200.0" />
    </children>
 </AnchorPane>

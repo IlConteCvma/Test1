@@ -2,16 +2,24 @@ package logic.model;
 
 public class Student {
 	
-	private String nome;
-	private String cognome;
+	private String name;
+	private String surname;
 	private String username;
 	private String password;
 	
-	public Student(String nome, String cognome, String username, String password) {
-		this.nome = nome;
-		this.cognome = cognome;
+	public Student(String name, String surname, String username, String password) {
+		this.name = name;
+		this.surname = surname;
 		this.username = username;
 		this.password = password;
+	}
+	
+	public String getName() {
+		return name;
+	}
+	
+	public String getSurname() {
+		return surname;
 	}
 	
 }
