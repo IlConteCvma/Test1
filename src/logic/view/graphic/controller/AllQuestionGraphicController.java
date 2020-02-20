@@ -1,6 +1,5 @@
 package logic.view.graphic.controller;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -8,7 +7,6 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Hyperlink;
@@ -24,18 +22,19 @@ import logic.controller.AllQuestionController;
 import logic.view.AlertControl;
 import logic.view.NamePage;
 
-public class AllQuestionGraphicController extends GraphicController implements Initializable{
+public class AllQuestionGraphicController extends GraphicController{
 	
 	@FXML VBox table;
 	
 	
 	@FXML
-	public void homeButton() throws IOException {
-		goToPage(NamePage.HOME);
+	public void homeButton(){
+			goToPage(NamePage.HOME);
+		
 	}
 	
 	@FXML
-	public void newQuestButton() throws IOException {
+	public void newQuestButton(){
 		goToPage(NamePage.QUESTIONTYPE);
 	}
 	
@@ -47,7 +46,7 @@ public class AllQuestionGraphicController extends GraphicController implements I
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		
+				
 		AllQuestionController controller = new AllQuestionController();
 		List<QuestionBean> bean = controller.getQuestions();
 		table.setSpacing(5);
@@ -68,17 +67,17 @@ public class AllQuestionGraphicController extends GraphicController implements I
 	private HBox makeBox(QuestionBean bean) {
 		//create a line
 		HBox box = new HBox(0.0);
-		VBox.setMargin(box, new Insets(5));
+		HBox.setMargin(box, new Insets(5));
 		
 		StackPane blank = new StackPane();
 		blank.setMinSize(10, 54);
 		
 	
-		StackPane pane1 = makePane(40,"  "+String.valueOf(bean.getId()).toString(),false);//34
-		StackPane pane2 = makePane(210,"  "+bean.getTitle(),true);//205,150
-		StackPane pane3 = makePane(125,"  "+bean.getStudent(),false);//125
-		StackPane pane4 = makePane(70,"  "+bean.getSubject(), false);//75
-		StackPane pane5 = makePane(80,"  "+bean.getType().toString(),false);//120
+		StackPane pane1 = makePane(40,"  "+String.valueOf(bean.getId()).toString(),null);//34
+		StackPane pane2 = makePane(210,"  "+bean.getTitle(),bean);//205,150
+		StackPane pane3 = makePane(125,"  "+bean.getStudent(),null);//125
+		StackPane pane4 = makePane(70,"  "+bean.getSubject(), null);//75
+		StackPane pane5 = makePane(80,"  "+bean.getType().toString(),null);//120
 		StackPane pane6 = makeValPane(bean.isSolved());
 		
 		box.getChildren().addAll(blank,pane1,pane2,pane3,pane4,pane5,pane6);
@@ -104,7 +103,7 @@ public class AllQuestionGraphicController extends GraphicController implements I
 		return pane;
 	}
 	
-	private StackPane makePane(double width,String text,boolean link) {
+	private StackPane makePane(double width,String text,QuestionBean bean) {
 		//for all Type
 		StackPane pane = new StackPane();
 		Rectangle rec = new Rectangle(width,54);
@@ -114,21 +113,21 @@ public class AllQuestionGraphicController extends GraphicController implements I
 		StackPane.setAlignment(rec, Pos.CENTER_LEFT);
 		pane.getChildren().add(rec);
 		
-		if(!link) {
+		if(bean == null) {
 			Label lab = new Label(text);
 			pane.getChildren().add(lab);
 			
 			
 		}
 		else {
+			
 			Hyperlink ln = new Hyperlink(text);
 			ln.setOnAction(new EventHandler<ActionEvent>() {
 
 			@Override
 			public void handle(ActionEvent event) {
-				
-				//GOTO page specQuestion passa bean
-				
+					goToPage(NamePage.SHOWQUEST, (Object)bean);
+			
 			}
 		
 

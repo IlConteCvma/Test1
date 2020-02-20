@@ -6,14 +6,17 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-
 import logic.model.Seat;
 import logic.model.SingletonConnectionDB;
 import logic.model.queries.SeatQueries;
 
 public class SeatDao {
 	
-	public List<Seat> getSeatsOfRoom(String nameRoom) throws SQLException {
+	private SeatDao() {
+		throw new IllegalStateException("Utility class");
+	}
+	
+	public static List<Seat> getSeatsOfRoom(String nameRoom) throws SQLException {
         
 	 	Statement stmt = null;
         Connection conn = null;
@@ -50,15 +53,12 @@ public class SeatDao {
             	if(stmt != null){
             		stmt.close();
             	}
-            	if (conn != null) {
-    				SingletonConnectionDB.close();
-    			}
             	
             }
         	return seatsOfRoom;
     }
 	
-	public void occupySeat(String nameRoom, int idSeat) throws SQLException {
+	public static void occupySeat(String nameRoom, int idSeat) throws SQLException {
         
 	 	Statement stmt = null;
         Connection conn = null;
@@ -77,14 +77,10 @@ public class SeatDao {
             	if(stmt != null){
             		stmt.close();
             	}
-            	if (conn != null) {
-    				SingletonConnectionDB.close();
-    			}
-            	
             }
       }
 	
-	public void freeSeat(String nameRoom, int idSeat) throws SQLException {
+	public static void freeSeat(String nameRoom, int idSeat) throws SQLException {
         
 	 	Statement stmt = null;
         Connection conn = null;
@@ -103,10 +99,6 @@ public class SeatDao {
             	if(stmt != null){
             		stmt.close();
             	}
-            	if (conn != null) {
-    				SingletonConnectionDB.close();
-    			}
-            	
             }
       }
 }

@@ -7,10 +7,10 @@ import logic.model.Student;
 public class Session {
 	private static Session instance = null;
 	private Student studentLog;
-
+	private int indexOfSeat;
 	
 	protected Session(){
-		
+		indexOfSeat = 0;
 	}
 	
 	public static synchronized Session getSession() {
@@ -26,6 +26,14 @@ public class Session {
 
 	public void setStudent(Student student) {
 		this.studentLog = student;
+	}
+
+	public int getIndexOfSeat() {
+		return indexOfSeat;
+	}
+
+	public void setIndexOfSeat(int indexOfSeat) {
+		this.indexOfSeat = indexOfSeat;
 	}
 
 }

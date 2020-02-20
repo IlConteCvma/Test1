@@ -1,9 +1,13 @@
 package logic.view.graphic.controller;
 
-import java.io.IOException;
+
+import java.net.URL;
+import java.util.ResourceBundle;
 
 import execption.QuestionException;
 import javafx.fxml.FXML;
+import javafx.geometry.Pos;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import logic.bean.QuestionBean;
@@ -12,14 +16,18 @@ import logic.model.QuestionFactory;
 import logic.view.AlertControl;
 import logic.view.NamePage;
 
+
 public class QuestionGraphic extends GraphicController {
-	
+
+	private static final String WARNING = "COMING SOON";
+	private static final String NOTAVAILABLE = "Operation not available";
 	protected QuestionFactory factory;
 	protected String subject;
 	protected QuestionBean qBean;
 	@FXML protected Label message;
 	@FXML protected TextArea title;
 	@FXML protected TextArea body;
+	@FXML protected Button saveButton;
 	
 	public QuestionGraphic(String param) {
 				
@@ -62,18 +70,35 @@ public class QuestionGraphic extends GraphicController {
 		try {
 			InsertQuestionController controller = new InsertQuestionController(this.factory,qBean);
 			controller.startSave(this.subject);
+			this.message.setText("Save completed");
+			saveButton.setDisable(true);
 		
 		}
 		catch(QuestionException e){
-			
+			//il messaggio deve catturlo dall'exception e
 			AlertControl.infoBox("error on save DB", "ERROR");
 			
 			this.message.setText("Error on save");
 		}
-		this.message.setText("finito");
+		
+		
 	}
 	
-	public void back() throws IOException {
+	public void back(){
 		goToPage(NamePage.QUESTIONTYPE);
+		
 	}
+	
+	public void saveLocal() {
+		AlertControl.infoBox(NOTAVAILABLE, WARNING);
+	}
+
+
+
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		message.setAlignment(Pos.CENTER);
+		message.setText(subject);
+	}
+
 }

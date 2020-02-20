@@ -1,13 +1,18 @@
 package logic.controller;
 
+import java.sql.SQLException;
+
+import execption.EntityNotFoundException;
 import logic.model.Lesson;
-import logic.model.dao.NextLessonDao;
+import logic.model.dao.LessonDao;
+
 
 public class ViewNextLessonController {
 	
-	public Lesson getNextLesson() {
-		NextLessonDao nextLessonDao = new NextLessonDao();
-		return nextLessonDao.getNextLesson();	
+	public Lesson getNextLesson() throws SQLException, EntityNotFoundException {
+		
+		return LessonDao.getNextLesson();	
+		
 	}
 
 }

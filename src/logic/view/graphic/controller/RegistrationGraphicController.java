@@ -1,6 +1,6 @@
 package logic.view.graphic.controller;
 
-import java.io.IOException;
+
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -10,7 +10,6 @@ import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
@@ -30,7 +29,8 @@ import logic.model.TypeVehicle;
 import logic.view.AlertControl;
 import logic.view.NamePage;
 
-public class RegistrationGraphicController extends GraphicController implements Initializable {
+public class RegistrationGraphicController extends GraphicController {
+	
 
 	private static final int ROWPERSONALDATA = 2;
 	private static final int COLPERSONALDATA = 2;
@@ -46,7 +46,7 @@ public class RegistrationGraphicController extends GraphicController implements 
 	@FXML private AnchorPane container;
 	@FXML private Label title;
 	
-	private RegistrationController regCtrl = new RegistrationController();
+	private RegistrationController regCtrl;
 	TextField[] textFieldPersonalData = new TextField[4];
 	TextField[] textFieldCredential = new TextField[2];
 	TextField streetNumberField;
@@ -56,6 +56,7 @@ public class RegistrationGraphicController extends GraphicController implements 
 	public void initialize(URL arg0, ResourceBundle arg1) {
 
 		// Set the gridpane of personal data
+		
 		personalDataGridPane.setHgap(10);
 		personalDataGridPane.setVgap(10);
 		for (int i = 0; i < ROWPERSONALDATA; i++) {
@@ -98,27 +99,33 @@ public class RegistrationGraphicController extends GraphicController implements 
 		choiceBoxProfession.getSelectionModel().selectedItemProperty()
 				.addListener((ObservableValue<? extends String> observable, String oldValue,
 						String newValue) -> changeProfession(newValue));
-
+		
 		// Set choiche box
 		choiceBoxVehicle.getItems().addAll(TypeVehicle.BUS, TypeVehicle.CAR, TypeVehicle.SCOOTER);
 		choiceBoxVehicle.getSelectionModel().select(0);
 	}
 
 	@FXML
-	public void signIn() throws IOException {
+	public void signIn() {
 		goToPage(NamePage.LOGIN);
+	
 	}
 
 	@FXML
 	public void signUp() {
 
 		// check data inserted
-		if (checkData() && AlertControl.confirmation()) {
+		if (checkData() && AlertControl.confirmation("Are your data correct?")) {
 				UserBean newUser = new UserBean();
 				populeBean(newUser);
-				regCtrl.createStudent(newUser);
-				container.getChildren().remove(1);
-				chooseCourse();
+				try {
+					regCtrl=new RegistrationController();
+					regCtrl.createStudent(newUser);
+					container.getChildren().remove(1);
+					chooseCourse();
+				} catch (SQLException e) {
+					AlertControl.infoBox("Error connect to db or username already used", "Error connection db");
+				}
 		}
 	}
 
@@ -160,6 +167,8 @@ public class RegistrationGraphicController extends GraphicController implements 
 			gp.setLayoutX(135);
 			gp.setVgap(20);
 	        Button b = new Button("Follow");
+	        b.setStyle("-fx-background-color: #272F54;-fx-text-fill: white;");
+	        b.setMinWidth(202);
 	        gp.add(b, 0, subjcetOfCourse.size());
 	        gp.setAlignment(Pos.CENTER);
 	        b.setLayoutX(180);
@@ -168,11 +177,7 @@ public class RegistrationGraphicController extends GraphicController implements 
 	            public void handle(ActionEvent e) { 	
 						if(completeRegistration(allSubject)) {
 							AlertControl.infoBox("Welcome in MAAL\n\nRegistration completed!", "WELCOME");
-							try {
-								goToPage(NamePage.LOGIN);
-							} catch (IOException e1) {
-								e1.printStackTrace();
-							}
+							goToPage(NamePage.LOGIN);
 						}
 	            }
 	        });
@@ -180,7 +185,6 @@ public class RegistrationGraphicController extends GraphicController implements 
 	        gp.add(l, 0, subjcetOfCourse.size()+1);
 	        container.getChildren().add(gp);
 		} catch (SQLException e) {
-			e.printStackTrace();
 			AlertControl.infoBox("Ops..", "I'm sorry!");
 		}
 	}
@@ -200,7 +204,7 @@ public class RegistrationGraphicController extends GraphicController implements 
 			try {
 				regCtrl.followSubject(subjectNames);
 			} catch (SQLException e) {
-				e.printStackTrace();
+				AlertControl.infoBox("Error in db connection", "ERROR");
 			}
 			return true;
 		}
@@ -208,11 +212,13 @@ public class RegistrationGraphicController extends GraphicController implements 
 	}
 	
 	private boolean checkData() {
+		
+		if(streetNumberField.getText().isEmpty()) return false;
 
 		// check personal data
-		for (int i = 0; i < textFieldPersonalData.length - 1; i++) {
+		for (int i = 0; i < textFieldPersonalData.length; i++) {
 			if (textFieldPersonalData[i].getText().isEmpty()) {
-				AlertControl.infoBox("Check personal data", "Error");
+				AlertControl.infoBox("Please insert your personal data", "Error");
 				return false;
 			}
 		}
@@ -220,7 +226,7 @@ public class RegistrationGraphicController extends GraphicController implements 
 		// check credential
 		for (int i = 0; i < textFieldCredential.length; i++) {
 			if (textFieldCredential[i].getText().isEmpty()) {
-				AlertControl.infoBox("Check credential", "Error");
+				AlertControl.infoBox("Please insert your credential", "Error");
 				return false;
 			}
 		}
@@ -234,7 +240,7 @@ public class RegistrationGraphicController extends GraphicController implements 
 		newUser.setUsername(textFieldCredential[0].getText());
 		newUser.setPassword(textFieldCredential[1].getText());
 		newUser.setAddress(textFieldPersonalData[2].getText());
-		newUser.setCity(textFieldPersonalData[2].getText());
+		newUser.setCity(textFieldPersonalData[3].getText());
 		newUser.setNumberOfStreet(streetNumberField.getText());
 		newUser.setVehicle(choiceBoxVehicle.getValue());
 	}

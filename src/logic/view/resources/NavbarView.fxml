@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.SplitPane?>
@@ -10,11 +10,12 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.shape.Polygon?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="133.0" prefWidth="899.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="logic.view.graphic.controller.NavbarGraphicController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="133.0" prefWidth="899.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <SplitPane dividerPositions="0.5" orientation="VERTICAL" prefHeight="132.0" prefWidth="899.0">
          <items>
@@ -22,32 +23,37 @@
                <children>
                   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ebebeb" height="46.0" layoutX="554.0" layoutY="9.0" stroke="BLACK" strokeType="INSIDE" width="313.0" />
                   <Hyperlink layoutX="300.0" opacity="0.0" />
-                  <Hyperlink layoutX="490.0" layoutY="20.0" onAction="#logOutButton" prefHeight="23.0" prefWidth="64.0" text="Log out" textOverrun="CLIP" underline="true">
-                     <cursor>
-                        <Cursor fx:constant="DEFAULT" />
-                     </cursor>
-                  </Hyperlink>
                   <TextField layoutX="563.0" layoutY="20.0" prefHeight="0.0" prefWidth="219.0" promptText="rapid function" />
+                  <HBox layoutX="255.0" layoutY="17.0" prefHeight="25.0" style="-fx-spacing: 10;">
+                     <children>
+                        <ImageView fitHeight="32.0" fitWidth="32.0" nodeOrientation="RIGHT_TO_LEFT" onMouseClicked="#logOutButton" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@img/logout.png" />
+                           </image>
+                        </ImageView>
+                        <Label fx:id="nameLab" layoutY="30.0" prefHeight="32.0" style="-fx-text-fill: #ffffff;" textFill="WHITE" />
+                     </children>
+                  </HBox>
                </children>
             </AnchorPane>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="46.0" prefWidth="897.0" style="-fx-background-color: #FFFDFD;">
                <children>
-                  <Button layoutX="235.0" layoutY="11.0" mnemonicParsing="false" onAction="#homeButton" prefHeight="41.0" prefWidth="125.0" style="-fx-background-color: #FBF9F9; -fx-border-color: #626262; -fx-text-fill: #000000;" text="Home">
+                  <Button fx:id="homeButton" layoutX="235.0" layoutY="11.0" mnemonicParsing="false" onAction="#homeButton" prefHeight="41.0" prefWidth="125.0" style="-fx-background-color: #FBF9F9; -fx-border-color: #626262; -fx-text-fill: #000000;" text="Home">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </Button>
-                  <Button layoutX="405.0" layoutY="11.0" mnemonicParsing="false" onAction="#calendarButton" prefHeight="41.0" prefWidth="125.0" style="-fx-background-color: #FBF9F9; -fx-border-color: #626262; -fx-text-fill: #000000;" text="Calendar" textFill="WHITE">
+                  <Button fx:id="calButton" layoutX="405.0" layoutY="11.0" mnemonicParsing="false" onAction="#calendarButton" prefHeight="41.0" prefWidth="125.0" style="-fx-background-color: #FBF9F9; -fx-border-color: #626262; -fx-text-fill: #000000;" text="Calendar" textFill="WHITE">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </Button>
-                  <Button layoutX="731.0" layoutY="11.0" mnemonicParsing="false" onAction="#profileButton" prefHeight="41.0" prefWidth="125.0" style="-fx-background-color: #FBF9F9; -fx-border-color: #626262; -fx-text-fill: #000000;" text="Profile" textFill="WHITE">
+                  <Button fx:id="profButton" layoutX="731.0" layoutY="11.0" mnemonicParsing="false" onAction="#profileButton" prefHeight="41.0" prefWidth="125.0" style="-fx-background-color: #FBF9F9; -fx-border-color: #626262; -fx-text-fill: #000000;" text="Profile" textFill="WHITE">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </Button>
-                  <MenuButton alignment="CENTER" layoutX="569.0" layoutY="11.0" mnemonicParsing="false" prefHeight="0.0" prefWidth="125.0" style="-fx-background-color: #FBF9F9; -fx-border-color: #626262; -fx-text-fill: #000000;" text="Forum" textFill="WHITE">
+                  <MenuButton fx:id="forum" alignment="CENTER" layoutX="569.0" layoutY="11.0" mnemonicParsing="false" prefHeight="0.0" prefWidth="125.0" style="-fx-background-color: #FBF9F9; -fx-border-color: #626262; -fx-text-fill: #000000;" text="Forum" textFill="WHITE">
                     <items>
                       <MenuItem mnemonicParsing="false" onAction="#allQuestion" text="View Question" />
                       <MenuItem mnemonicParsing="false" onAction="#newQuestion" text="Insert new Question" />

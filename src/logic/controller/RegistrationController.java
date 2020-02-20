@@ -16,16 +16,14 @@ import logic.model.dao.StudentDao;
 
 public class RegistrationController {
 	
-	public void createStudent(UserBean newUser) {
+	public void createStudent(UserBean newUser) throws SQLException {
 		Address addressUser = new Address(newUser.getAddress(),newUser.getNumberOfStreet(),newUser.getCity());
 		Vehicle vehicleUser = new Vehicle(newUser.getVehicle());
 		Student newStudent = new Student(newUser.getName(),newUser.getSurname(),newUser.getUsername(),newUser.getPassword(),addressUser,vehicleUser);
-		try {
-			StudentDao.insertNewStudent(newStudent);
-			Session.getSession().setStudent(newStudent);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+		
+		StudentDao.insertNewStudent(newStudent);
+		Session.getSession().setStudent(newStudent);
+		
 	}
 	
 	public CourseBean findCourse(String course) throws SQLException {

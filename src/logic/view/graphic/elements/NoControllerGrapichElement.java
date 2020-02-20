@@ -11,7 +11,7 @@ public class NoControllerGrapichElement {
 	public NoControllerGrapichElement(String element) {
 		this.myElement = element;
 	}
-	
+		
 	
 	public FXMLLoader draw() throws IOException {
 		

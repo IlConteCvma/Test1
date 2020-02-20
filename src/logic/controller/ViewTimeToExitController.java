@@ -4,22 +4,16 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
-import execption.LessonNotFoundException;
+import org.json.JSONException;
+import execption.EntityNotFoundException;
 import execption.TimeException;
-import javafx.scene.Scene;
-import logic.MainClass;
 import logic.Session;
-import logic.bean.SeatBean;
 import logic.bean.TimeToExitBean;
 import logic.model.Journey;
 import logic.model.Lesson;
 import logic.model.MapsApi;
 import logic.model.TimeApi;
 import logic.model.WeatherApi;
-import logic.model.dao.SeatDao;
-import logic.view.HomeTimePage;
-import logic.view.Page;
-import logic.view.graphic.controller.TimeToExitGraphicController;
 
 public class ViewTimeToExitController {
 	
@@ -28,32 +22,24 @@ public class ViewTimeToExitController {
 	private static final int MINUTEOFADVANCE = 15;
 	private static final double PERCENTDISTANCEADD = 0.14;
 	
-	//association attribute
-	private ViewNextLessonController nextLessonController = new ViewNextLessonController();
+	
 	
 	private Journey nextJourney;
 	private TimeToExitBean timeToExitBean;
 	
-	public void getInfoByMaps(){
+	private void getInfoByMaps() throws JSONException, IOException{
 		MapsApi map = new MapsApi();
 		//Calculate latitude and longitude 
-		try {
-			nextJourney = new Journey(map.getPosition(Session.getSession().getStudent().getAddress().getFullAddress()));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		nextJourney = new Journey(map.getPosition(Session.getSession().getStudent().getAddress().getFullAddress()));
 		//Calculate distance in km
-		nextJourney.setDistance(map.calculateDistance(nextJourney.getOriginAddress(),nextJourney.getDestinationAddress()));
+		nextJourney.setDistance(map.calculateDistance(nextJourney.getOriginAddress(),nextJourney.getDestinationAddress()));	
 	}
 	
-	public void getInfoByWeather(){
+	private void getInfoByWeather() throws JSONException, IOException{
 		WeatherApi weather = new WeatherApi();
 		String rainIntensity = null;
-		try {
-			rainIntensity = weather.getRainIntensity();
-		} catch (IOException e) {
-				e.printStackTrace();
-		}
+		rainIntensity = weather.getRainIntensity();
+		
 		if(rainIntensity.equals("Light")) {
 			nextJourney.setLateForWeather(5);
 		}else if(rainIntensity.equals("Moderate")){
@@ -61,7 +47,8 @@ public class ViewTimeToExitController {
 		}
 	}
 	
-	public void estimateTimeToExit() throws IOException, TimeException, LessonNotFoundException{
+	public TimeToExitBean estimateTimeToExit() throws IOException, TimeException, EntityNotFoundException, SQLException{
+		ViewNextLessonController nextLessonController = new ViewNextLessonController();
 		Lesson nextLesson = nextLessonController.getNextLesson();
 		if(nextLesson != null) {
 			TimeApi time = new TimeApi();
@@ -86,18 +73,14 @@ public class ViewTimeToExitController {
 				timeToExitBean.setHourToExit(time.timeAdd(timeToExit));
 				timeToExitBean.setNextJourney(nextJourney);
 				timeToExitBean.setNextLesson(nextLesson);
-				new TimeToExitGraphicController(timeToExitBean);
-				
-				Page root = new HomeTimePage(timeToExitBean);
-				Scene scene = new Scene(root);
-				MainClass.getStage().setScene(scene);
+				return timeToExitBean;
 			}
 		}else {
-			throw new LessonNotFoundException();
+			throw new EntityNotFoundException("Lesson");
 		}
 	}
 	
-	public double calculateTimeBasedOccupationRoom(int priority) {
+	private double calculateTimeBasedOccupationRoom(int priority) {
 		int freePlaces = timeToExitBean.getNextLesson().getRoomLesson().getNumberOfFreePlacesForPriority(priority);
 		double minute = 0;
 		if(freePlaces != 0) {
@@ -111,21 +94,4 @@ public class ViewTimeToExitController {
 		return minute;
 	}
 	
-	public void occupateSeat(SeatBean seat) {
-		SeatDao seatDao = new SeatDao();
-		try {
-			seatDao.occupySeat(seat.getRoom().getName(), seat.getIndex());
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
-	
-	public void freeSeat(SeatBean seat) {
-		SeatDao seatDao = new SeatDao();
-		try {
-			seatDao.freeSeat(seat.getRoom().getName(), seat.getIndex());
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
 }

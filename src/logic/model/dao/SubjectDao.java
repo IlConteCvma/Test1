@@ -12,10 +12,15 @@ import logic.model.queries.SubjectQueries;
 
 public class SubjectDao {
 	
+	
+	
 	private static final String INDEX = "Indice";
 	private static final String ABBREVATION = "Sigla";
 	
-	public Subject getSubjectLesson(int idLesson)  throws SQLException {
+	private SubjectDao() {
+		throw new IllegalStateException("Utility class");
+	}
+	public static Subject getSubjectByLesson(int idLesson)  throws SQLException {
         
 	 	Statement stmt = null;
         Connection conn = null;
@@ -49,9 +54,6 @@ public class SubjectDao {
             	if(stmt != null){
             		stmt.close();
             	}
-            	if (conn != null) {
-    				SingletonConnectionDB.close();
-    			}
             }
         	return subjectOfLesson;
     }
@@ -95,10 +97,6 @@ public class SubjectDao {
             	if(stmt != null){
             		stmt.close();
             	}
-            	if (conn != null) {
-    				SingletonConnectionDB.close();
-    			}
-            	
             }
 		
 		return subject;
@@ -137,9 +135,6 @@ public class SubjectDao {
             	if(stmt != null){
             		stmt.close();
             	}
-            	if (conn != null) {
-    				SingletonConnectionDB.close();
-    			}
             }
         	return subject;
 		

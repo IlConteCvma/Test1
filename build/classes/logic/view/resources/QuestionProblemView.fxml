@@ -15,8 +15,8 @@
          <children>
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e1ae40" height="95.0" layoutX="4.0" layoutY="286.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="265.0" />
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#851c28e5" height="288.0" layoutX="4.0" layoutY="-2.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="265.0" />
-            <Button layoutX="74.0" layoutY="145.0" mnemonicParsing="false" onAction="#commit" prefHeight="40.0" prefWidth="125.0" style="-fx-background-color: #272F54;" text="Save" textAlignment="CENTER" textFill="WHITE" />
-            <Button layoutX="74.0" layoutY="217.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="125.0" style="-fx-background-color: #272F54;" text="Save locally" textAlignment="CENTER" textFill="WHITE" />
+            <Button fx:id="saveButton" layoutX="74.0" layoutY="145.0" mnemonicParsing="false" onAction="#commit" prefHeight="40.0" prefWidth="125.0" style="-fx-background-color: #272F54;" text="Save" textAlignment="CENTER" textFill="WHITE" />
+            <Button layoutX="74.0" layoutY="217.0" mnemonicParsing="false" onAction="#saveLocal" prefHeight="40.0" prefWidth="125.0" style="-fx-background-color: #272F54;" text="Save locally" textAlignment="CENTER" textFill="WHITE" />
             <Polygon fill="#66171f" layoutX="240.0" layoutY="337.0" points="-235.99998474121094, -51.000030517578125, -103.49998474121094, -29.000030517578125, 29.20001220703125, -51.000030517578125" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
             <Polygon fill="#851c28e5" layoutX="248.0" layoutY="144.0" points="-244.0, 142.0, 21.0, 142.0, -111.39997863769531, 152.99996948242188" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
             <Button layoutX="73.0" layoutY="320.0" mnemonicParsing="false" onAction="#back" prefHeight="40.0" prefWidth="125.0" style="-fx-background-color: #272F54;" text="Go Back" textAlignment="CENTER" textFill="WHITE">
@@ -25,7 +25,7 @@
                </font>
             </Button>
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="53.0" layoutX="74.0" layoutY="41.0" stroke="BLACK" strokeType="INSIDE" width="125.0" />
-            <Label fx:id="message" layoutX="78.0" layoutY="48.0" prefHeight="40.0" prefWidth="114.0" text="Label" />
+            <Label fx:id="message" layoutX="78.0" layoutY="46.0" prefHeight="40.0" prefWidth="114.0" text="Label" wrapText="true" />
          </children>
       </AnchorPane>
       <AnchorPane layoutX="300.0" layoutY="52.0" prefHeight="377.0" prefWidth="567.0">

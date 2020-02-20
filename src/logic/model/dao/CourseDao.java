@@ -59,10 +59,6 @@ public class CourseDao {
 			if (stmt != null) {
 				stmt.close();
 			}
-			if (conn != null) {
-				SingletonConnectionDB.close();
-			}
-
 		}
 
 		if (subject != null) {

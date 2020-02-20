@@ -145,16 +145,16 @@ public class InsertQuestionController {
 	
 	
 	private void saveText() throws ReflectiveOperationException {
-		
+		//public for test
 		Object returned = this.dataBean.getClass().getMethod("getText").invoke(this.dataBean);
-		this.question.getClass().getMethod("setText", String.class).invoke(this.question, (String)returned);
+		this.question.getClass().getMethod("setText", String.class).invoke(this.question, (String) returned);
 		
 	}
 	
 	private void saveImage()throws ReflectiveOperationException {
 		
-		Object returned = this.dataBean.getClass().getMethod("getText").invoke(this.dataBean);
-		this.question.getClass().getMethod("setText", String.class).invoke(this.question, (String)returned);
+		Object returned = this.dataBean.getClass().getMethod("getImage").invoke(this.dataBean);
+		this.question.getClass().getMethod("setImage", String.class).invoke(this.question, (String)returned);
 	}
 	
 	private void saveQuestion() throws QuestionException{
@@ -162,6 +162,18 @@ public class InsertQuestionController {
 		QuestionDao.saveOnDB(this.question, this.dataBean.getType());		
 		
 	}
+	
+	public Question getQuestion() {
+		//function for test
+		return this.question;
+	}
+	
+	public void saveTextReflection(String text) throws ReflectiveOperationException{
+		//public for test
+		this.question = this.factory.createQuestion();
+		this.question.getClass().getMethod("setText", String.class).invoke(this.question, text);
+	}
+	
 
 	
 	

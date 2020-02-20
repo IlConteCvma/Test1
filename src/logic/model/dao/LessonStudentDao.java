@@ -35,10 +35,6 @@ public class LessonStudentDao {
 				if (stmt != null) {
 					stmt.close();
 				}
-				if (conn != null) {
-					SingletonConnectionDB.close();
-				}
-
 			}
 
 		

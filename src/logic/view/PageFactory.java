@@ -38,4 +38,18 @@ public class PageFactory {
 		
 		
 	}
+	
+	public static Page createPage(NamePage type,Object arg) throws IOException {
+		
+		if(type.equals(NamePage.SHOWQUEST)) {
+			return new ShowQuestionPage(arg);
+		}
+		else {
+			throw new IOException("Invalid type or args");
+		}
+			
+		
+		
+	}
+	
 }

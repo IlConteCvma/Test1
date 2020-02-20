@@ -10,10 +10,10 @@ public class RoomQueries {
 		 throw new IllegalStateException("Utility class");
 	 }
 	
-	public static ResultSet findNameRoomByIdLesson(Statement stmt, int idLesson) throws SQLException  {
+	public static ResultSet findRoomByIdLesson(Statement stmt, int idLesson) throws SQLException  {
 		
 		
-		String sql = "SELECT aula.Nome " + 
+		String sql = "SELECT * " + 
 				"FROM lezione join aula on lezione.Aula = aula.Nome " + 
 				"WHERE lezione.ID = "+ idLesson +";";
 		

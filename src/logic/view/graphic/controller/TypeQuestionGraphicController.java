@@ -1,7 +1,5 @@
 package logic.view.graphic.controller;
 
-
-import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -9,7 +7,6 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -18,6 +15,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.TextAlignment;
 import logic.bean.SubjectBean;
 import logic.controller.InsertQuestionController;
+import logic.view.AlertControl;
 import logic.view.NamePage;
 
 
@@ -25,7 +23,9 @@ import logic.view.NamePage;
 
 
 
-public class TypeQuestionGraphicController extends GraphicController implements Initializable{
+public class TypeQuestionGraphicController extends GraphicController{
+	
+
 	
 	
 	@FXML Button buttonExe;
@@ -35,51 +35,56 @@ public class TypeQuestionGraphicController extends GraphicController implements 
 	
 	private InsertQuestionController controller;
 	
-	public TypeQuestionGraphicController() {
-		this.controller = new InsertQuestionController();
-	}
-	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		this.controller = new InsertQuestionController();
 		mySubject();
 		
 	}
 	
 	
+	@FXML
+	public void getHelp() {
+		
+		AlertControl.infoBox("Sorry my programmers didn't give me a very rich vocabulary ... Choose one subject and after the type of question you want to enter ", "Help page","Here to help");
+	}
 	
-	
-	
-	public void homeButton() throws IOException {
+	public void homeButton() {
 		goToPage(NamePage.HOME);
+		
 	}
 	
 
-	public void typeExercise() throws IOException {
+	public void typeExercise(){
 		
 		String[] args = new String[2];
 		args[0]= this.subSelect;
 		args[1]= "../../resources/QuestionExerciseView.fxml";
 		
-		goToPage(NamePage.EXERCISE, args);
+
+			goToPage(NamePage.EXERCISE, args);
 		
 		
 	}
-	public void back() throws IOException {
-		goToPage(NamePage.ALLQUESTION);
+	public void back(){
+
+			goToPage(NamePage.ALLQUESTION);
+
 	}
 	
-	public void typeProblem() throws IOException {
+	public void typeProblem() {
 
 		String[] args = new String[2];
 		args[0]=this.subSelect;
 		args[1]="../../resources/QuestionProblemView.fxml";
 		
 		goToPage(NamePage.PROBLEM, args);
+
 	}
 	
 
 	private void mySubject() {
-		 
+		
 		List<SubjectBean> bean = this.controller.getSubjects();
 		gridPane.setVgap(25);
 		gridPane.setHgap(1);

@@ -3,14 +3,13 @@ package logic.view.graphic.controller;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import logic.bean.TimeToExitBean;
 import logic.view.graphic.elements.AnchorPaneComponent;
 
-public class TimeToExitGraphicController extends GraphicController implements Initializable{
+public class TimeToExitGraphicController extends GraphicController{
 
 	private TimeToExitBean timeToExitBean;
 	private AnchorPaneComponent anchorPane;
@@ -59,7 +58,7 @@ public class TimeToExitGraphicController extends GraphicController implements In
 			anchorPane.draw().getChildren().remove(0);
 			anchorPaneContainer.getChildren().remove(2);
 		}
-		AnchorPaneRoom anchorPaneRoom = new AnchorPaneRoom(anchorPane, timeToExitBean.getNextLesson());
+		AnchorPaneRoom anchorPaneRoom = new AnchorPaneRoom(anchorPane, timeToExitBean);
 		anchorPaneContainer.getChildren().add(anchorPaneRoom.draw());
 	}
 

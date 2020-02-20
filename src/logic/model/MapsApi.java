@@ -6,11 +6,10 @@ import java.util.List;
 import org.json.*;
 
 public class MapsApi{
-
-	private static RequestHttpApi connection = new RequestHttpApi();
-	private static String apikey = "AIzaSyBxqvZv-6yD5NY-JGuO8kuSqdxHNYj3Fs0";
     
-    public List<Double> getPosition(String place) throws IOException{
+    public List<Double> getPosition(String place) throws IOException, JSONException{
+    	RequestHttpApi connection = new RequestHttpApi();
+    	String apikey = "AIzaSyBxqvZv-6yD5NY-JGuO8kuSqdxHNYj3Fs0";
     	String urlRequest = "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input="+place+"&inputtype=textquery&fields=photos,formatted_address,name,rating,opening_hours,geometry&key=" + apikey;
     	String response = connection.sendRequest(urlRequest);
     	JSONObject positionObj = new JSONObject(response);
@@ -26,7 +25,7 @@ public class MapsApi{
     }
     
     public Double calculateDistance(List<Double> origin, List<Double> destination) {
-    	
+    	final int ERROR = 1;
     	double r = 6371e3 / 1000; // km
     	double d1 = origin.get(0) * 3.14 / 180;
     	double d2 = destination.get(0) * 3.14 / 180;
@@ -39,7 +38,7 @@ public class MapsApi{
     	
     	double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
 
-    	return r * c;
+    	return (r * c)+ERROR;
     	
     }
 }

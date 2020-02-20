@@ -19,7 +19,8 @@ import logic.model.queries.QuestionQueries;
 
 
 public class QuestionDao {
-	protected static Statement stmt;    
+	protected static Statement stmt;  
+	
     private QuestionDao() {
         throw new IllegalStateException("Utility class");
       }
@@ -52,9 +53,6 @@ public class QuestionDao {
           	if(stmt != null){
           		stmt.close();
           	}
-          	if (conn != null) {
-  				SingletonConnectionDB.close();
-  			}
           }
       	return count+1;
 		
@@ -191,10 +189,6 @@ public class QuestionDao {
             	if(stmt != null){
             		stmt.close();
             	}
-            	if (conn != null) {
-    				SingletonConnectionDB.close();
-    			}
-            	
             }
         
 		return quest;

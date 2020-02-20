@@ -6,10 +6,9 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 public class RequestHttpApi {
-	
-	static OkHttpClient client = new OkHttpClient();
 
     public String sendRequest(String url) throws IOException {
+		OkHttpClient client = new OkHttpClient();
     	Request request = new Request.Builder()
     			.url(url)
     			.build();

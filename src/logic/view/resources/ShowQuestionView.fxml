@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Polygon?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e2e7ec" height="468.0" stroke="BLACK" strokeType="INSIDE" width="900.0" />
+      <AnchorPane layoutX="31.29" layoutY="54.0" prefHeight="383.0" prefWidth="265.0">
+         <children>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e1ae40" height="95.0" layoutX="4.0" layoutY="286.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="265.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#851c28e6" height="288.0" layoutX="4.0" layoutY="-2.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="265.0" />
+            <Button fx:id="saveButton" layoutX="72.0" layoutY="224.0" mnemonicParsing="false" onAction="#saveLocal" prefHeight="40.0" prefWidth="125.0" style="-fx-background-color: #272F54;" text="Save Local" textAlignment="CENTER" textFill="WHITE" />
+            <Button layoutX="73.0" layoutY="172.0" mnemonicParsing="false" onAction="#answer" prefHeight="40.0" prefWidth="125.0" style="-fx-background-color: #272F54;" text="Answer" textAlignment="CENTER" textFill="WHITE" />
+            <Polygon fill="#66171f" layoutX="240.0" layoutY="337.0" points="-235.99998474121094, -51.000030517578125, -103.49998474121094, -29.000030517578125, 29.20001220703125, -51.000030517578125" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+            <Polygon fill="#851c28e5" layoutX="248.0" layoutY="144.0" points="-244.0, 142.0, 20.71002197265625, 142.39996337890625, -111.39997863769531, 152.99996948242188" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+            <Button layoutX="73.0" layoutY="320.0" mnemonicParsing="false" onAction="#back" prefHeight="40.0" prefWidth="125.0" style="-fx-background-color: #272F54;" text="Go Back" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Button>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="95.0" layoutX="74.0" layoutY="41.0" stroke="BLACK" strokeType="INSIDE" width="125.0" />
+            <Label fx:id="message" layoutX="78.0" layoutY="48.0" prefWidth="114.0" text="Type" wrapText="true" />
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="300.0" layoutY="52.0" prefHeight="377.0" prefWidth="567.0">
+         <children>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="383.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="0.0" style="-fx-background-color: f6c640;" width="567.0" />
+            <Label layoutX="23.0" layoutY="14.0" text="Title">
+               <font>
+                  <Font size="36.0" />
+               </font>
+            </Label>
+            <Label layoutX="14.0" layoutY="78.0" prefHeight="17.0" prefWidth="258.0" text="Body" />
+            <TextArea fx:id="body" editable="false" layoutX="14.0" layoutY="95.0" prefHeight="131.0" prefWidth="538.0" />
+            <TextArea fx:id="title" editable="false" layoutX="103.0" layoutY="16.0" prefHeight="53.0" prefWidth="450.0" />
+            <VBox fx:id="box" layoutX="15.0" layoutY="257.0" prefWidth="538.0" />
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

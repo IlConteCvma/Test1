@@ -24,9 +24,10 @@ public class MainClass extends Application{
 		
 		Scene scene = new Scene(root);
 		stage.setScene(scene);
-		stage.getIcons().add(new Image("file:view/resources/img/logo.png"));
+		
 		stage.setTitle("MAAL Assistant");
 		stage.getIcons().add(new Image(getClass().getResourceAsStream("view/resources/img/logo.png")));
+		stage.setMaxWidth(900);
 		stage.setResizable(false);
 		stage.show();
 		

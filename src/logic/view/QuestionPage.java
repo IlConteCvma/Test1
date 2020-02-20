@@ -7,8 +7,6 @@ import javafx.scene.layout.AnchorPane;
 import logic.view.graphic.controller.GraphicController;
 import logic.view.graphic.controller.QuestionExerciseGraphicController;
 import logic.view.graphic.controller.QuestionProblemGraphicController;
-import logic.view.graphic.elements.GraphicElementInterface;
-import logic.view.graphic.elements.NavbarElement;
 import logic.view.graphic.elements.NoControllerGrapichElement;
 
 public class QuestionPage extends Page {
@@ -18,7 +16,11 @@ public class QuestionPage extends Page {
 	}
 	
 	private void createPage(String param,String destination) throws IOException {
-		GraphicElementInterface nav = new NavbarElement();
+		
+		Navbar nav = Navbar.getNavbar();
+		nav.controller().setForum();
+		
+		
 		NoControllerGrapichElement qPage = new NoControllerGrapichElement(destination);
 		GraphicController controller;
 		if(destination.equals("../../resources/QuestionProblemView.fxml") ) {
@@ -33,7 +35,7 @@ public class QuestionPage extends Page {
 		load.setController(controller);
 		AnchorPane pane = load.load();
 
-		this.getChildren().add(nav.draw());
+		this.getChildren().add(nav);
 		this.getChildren().add(pane);
 		
 		

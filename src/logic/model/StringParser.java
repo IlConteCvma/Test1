@@ -1,26 +1,34 @@
 package logic.model;
 
-import logic.Session;
-
 public class StringParser {
 
-	public String parseStringMaps() {
-		Student studLog = Session.getSession().getStudent();
-		String address = studLog.getAddress().getStreet();
+	public String parseStringMaps(Address address) {
 		StringBuilder bld = new StringBuilder();
 		bld.append("https://google.com/maps/dir/");
-		for(int i=0;i<address.length();i++) {
-			if(address.charAt(i) == ' ') {
+		String street = address.getStreet();
+		for (int i = 0; i < street.length(); i++) {
+			if (street.charAt(i) == ' ') {
 				bld.append('+');
-			}else {
-				bld.append(address.charAt(i));
+			} else {
+				bld.append(street.charAt(i));
 			}
 		}
-		
-		bld.append(",+" + studLog.getAddress().getStreetNumber() + ",+" + studLog.getAddress().getCity() + "/Via+del+Politecnico,+1,+00100+Roma+RM");
-		
-		
+		if(isInt(address.getStreetNumber()) && !isInt(address.getCity())) {
+			bld.append(",+" + address.getStreetNumber() + ",+" + address.getCity() + "/Via+del+Politecnico,+1,+00100+Roma+RM");
+		}else {
+			return "Error";
+		}
+
 		return bld.toString();
 	}
-	
+
+	private boolean isInt(String str) {
+		try {
+			Integer.parseInt(str);
+			return true;
+		} catch (NumberFormatException e) {
+			return false;
+		}
+	}
+
 }
